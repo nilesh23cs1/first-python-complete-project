@@ -14,9 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path, include
+from mido import views as views_as
 
 urlpatterns = [
+    path('', views_as.index, name='index'),
+    path('account/',include('userapp.urls')),
     path('admin/', admin.site.urls),
-    path('mido/', include('mido.urls'))
+    path('mido/', include('mido.urls')),
+    path('contactus', views_as.contact, name='c1'),  # writing here views_as.contact instead of views.contact
+    path('aboutus', views_as.about, name='a1'),  # because we write from mido import views as views_as
+                                                 # instead of       from mido import views
 ]
